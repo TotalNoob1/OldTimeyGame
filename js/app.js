@@ -19,13 +19,11 @@ Enemy.prototype.update = function(dt) {
     // all computers.
     this.x = this.x + this.speed;
 
-    enemy.render();
+    this.render();
     if (this.x > 505){
       this.x =  0;
-      this.speed = Math.floor((Math.random()*10)+1);
-      if (this.speed < 6){
-        this.speed = this.speed + 2;
-      }
+      this.speed = Math.floor((Math.random()*6)+4);
+
     }
 
 };
@@ -38,13 +36,47 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 class createPlayer {
-  update(){
+  constructor(x,y){
+    this.x = x;
+    this.y = y;
+    this.up = 0;
+    this.down = 0;
+    this.right = 0;
+    this.left = 0;
 
+    this.sprite = 'images/char-boy.png';
+  }
+  update(keyCode){
+    if (this.x <= 404 && keyCode == 'right'){
+      this.x = this.right + this.x;
+      this.up = 0;
+    }else if (this.x >= 6 && keyCode == 'left') {
+      this.x = this.left + this.x;
+      this.left = 0;
+    }else if (this.y >= 46 && keyCode == 'up') {
+      this.y = this.up + this.y;
+      this.up = 0;
+    }else if (this.y <= 384 && keyCode == 'down') {
+      this.y = this.down + this.y;
+      this.down = 0;
+    }
   }
   render(){
-
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   }
-  handleInput(){
+  handleInput(keyCode){
+    if (keyCode == 'up'){
+      this.up = -85;
+    }
+    if(keyCode == 'down'){
+      this.down = 85;
+    }
+    if(keyCode == 'right'){
+      this.right = 100;
+    }
+    if(keyCode == 'left' ){
+      this.left = -100;
+    }
 
   }
 }
@@ -52,11 +84,13 @@ class createPlayer {
 // Now instantiate your objects.
 
 Enemy.prototype.constructor = Enemy;
-let enemy =  new Enemy(50 , 60 , Math.floor((Math.random()*10)+1));
+let enemy1 =  new Enemy(50 , 60 , Math.floor((Math.random()*10)+1));
+let enemy2 =  new Enemy(50 , 140 , Math.floor((Math.random()*10)+1));
+let enemy3 =  new Enemy(50 , 220 , Math.floor((Math.random()*10)+1));
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-var allEnemies = [enemy];
-var player = new createPlayer;
+var allEnemies = [enemy1,enemy2,enemy3];
+var player = new createPlayer(205,385,0,0);
 
 
 
@@ -71,7 +105,7 @@ document.addEventListener('keyup', function(e) {
     };
 
     player.handleInput(allowedKeys[e.keyCode]);
+    player.update(allowedKeys[e.keyCode]);
+
+
 });
-Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
