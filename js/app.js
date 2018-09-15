@@ -17,14 +17,15 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    this.x = this.x + this.speed * dt;
     this.x = this.x + this.speed;
 
     this.render();
     if (this.x > 505){
       this.x =  0;
-      this.speed = Math.floor((Math.random()*6)+4);
+      this.speed = Math.floor((Math.random()*6)+4);//The Math.random ensure that the speed is random
     }
-    if (this.x >player.x -7 && this.x <player.x +7 && this.y > player.y && this.y < player.y +25){
+    if (this.x >player.x -7 && this.x <player.x +7 && this.y > player.y && this.y < player.y +25){// This is the hit box for the enemys
       player.x = 205;
       player.y = 385;
 
@@ -60,7 +61,7 @@ class createPlayer {
     }else if (this.y >= 44 && keyCode == 'up') {
       this.y = this.up + this.y;
       this.up = 0;
-      if (this.y == -40){
+      if (this.y == -40){//this is the river position 
         alert("Congrats You Won!!");
         this.x = 205;
         player.y = 385;
@@ -98,8 +99,8 @@ let enemy2 =  new Enemy(50 , 140 , Math.floor((Math.random()*10)+2));
 let enemy3 =  new Enemy(50 , 220 , Math.floor((Math.random()*10)+2));
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-var allEnemies = [enemy1, enemy2, enemy3];
-var player = new createPlayer(205,385,0,0);
+var allEnemies = [enemy1, enemy2, enemy3];// Store the enemies
+var player = new createPlayer(205,385,0,0);//this is the player
 
 
 
@@ -114,7 +115,7 @@ document.addEventListener('keyup', function(e) {
     };
 
     player.handleInput(allowedKeys[e.keyCode]);
-    player.update(allowedKeys[e.keyCode]);
+    player.update(allowedKeys[e.keyCode]);//Allows me to access the keys in the update funtion
 
 
 });
