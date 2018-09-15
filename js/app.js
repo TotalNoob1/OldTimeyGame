@@ -20,12 +20,12 @@ Enemy.prototype.update = function(dt) {
     this.x = this.x + this.speed * dt;
     this.x = this.x + this.speed;
 
-    this.render();
+
     if (this.x > 505){
       this.x =  0;
       this.speed = Math.floor((Math.random()*6)+4);//The Math.random ensure that the speed is random
     }
-    if (this.x >player.x -7 && this.x <player.x +7 && this.y > player.y && this.y < player.y +25){// This is the hit box for the enemys
+    if (this.x >player.x -35 && this.x <player.x +10 && this.y > player.y && this.y < player.y +25){// This is the hit box for the enemys
       player.x = 205;
       player.y = 385;
 
@@ -61,10 +61,10 @@ class createPlayer {
     }else if (this.y >= 44 && keyCode == 'up') {
       this.y = this.up + this.y;
       this.up = 0;
-      if (this.y == -40){//this is the river position 
+      if (this.y == -40){//this is the river position
         alert("Congrats You Won!!");
         this.x = 205;
-        player.y = 385;
+        this.y = 385;
       }
     }else if (this.y <= 384 && keyCode == 'down') {
       this.y = this.down + this.y;
