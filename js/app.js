@@ -57,9 +57,14 @@ class createPlayer {
     }else if (this.x >= 6 && keyCode == 'left') {
       this.x = this.left + this.x;
       this.left = 0;
-    }else if (this.y >= 46 && keyCode == 'up') {
+    }else if (this.y >= 44 && keyCode == 'up') {
       this.y = this.up + this.y;
       this.up = 0;
+      if (this.y == -40){
+        alert("Congrats You Won!!");
+        this.x = 205;
+        player.y = 385;
+      }
     }else if (this.y <= 384 && keyCode == 'down') {
       this.y = this.down + this.y;
       this.down = 0;
