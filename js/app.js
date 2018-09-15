@@ -23,6 +23,10 @@ Enemy.prototype.update = function(dt) {
     if (this.x > 505){
       this.x =  0;
       this.speed = Math.floor((Math.random()*6)+4);
+    }
+    if (this.x >player.x -7 && this.x <player.x +7 && this.y > player.y && this.y < player.y +25){
+      player.x = 205;
+      player.y = 385;
 
     }
 
@@ -84,12 +88,12 @@ class createPlayer {
 // Now instantiate your objects.
 
 Enemy.prototype.constructor = Enemy;
-let enemy1 =  new Enemy(50 , 60 , Math.floor((Math.random()*10)+1));
-let enemy2 =  new Enemy(50 , 140 , Math.floor((Math.random()*10)+1));
-let enemy3 =  new Enemy(50 , 220 , Math.floor((Math.random()*10)+1));
+let enemy1 =  new Enemy(50 , 60 , Math.floor((Math.random()*10)+2));
+let enemy2 =  new Enemy(50 , 140 , Math.floor((Math.random()*10)+2));
+let enemy3 =  new Enemy(50 , 220 , Math.floor((Math.random()*10)+2));
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-var allEnemies = [enemy1,enemy2,enemy3];
+var allEnemies = [enemy1, enemy2, enemy3];
 var player = new createPlayer(205,385,0,0);
 
 
